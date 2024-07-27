@@ -1,26 +1,36 @@
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-# source "$HOME/.vim/bundle/vim-colorschemes/colors/gruvbox.vim"
 
 alias gs="git status"
 alias g="git"
 alias ga="git add ."
-alias nbim="nvim"
-alias nv="nvim"
 alias push="~/push.sh"
 
-PROMPT='%F{6}%n@%m%f %1~ %# '
-export PYENV_ROOT="$HOME/.pyenv"
+alias nbim="nvim"
+alias nv="nvim"
+alias nvom="nvim"
+alias nvin="nvim"
+alias ncim="nvim"
+alias vnum="nvim"
+alias vnim="nvim"
+
+alias sea="source env/bin/activate"
+alias python="python3"
+alias treee="tree -I env"
+
 set clipboard=unnamed
+PROMPT='%F{6}vesicularia@%m%f %1~ %# '
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 alias tmux="TERM=screen-256color-bce tmux"
 
-compctl -M '' 'm:{a-zA-Z}={A-Za-z}'
-
-if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-  alias pbcopy='wl-copy'
-  alias pbpaste='wl-paste'
-else
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
-fi
+export rl='Reinforcement Learning'
+export tcpl='The C Programming Language'
+export opv='Option Pricing and Volatility'
+export odi='OS Design and Implementation'
+export ci='Crafting Interpreters'
+export cbe='CUDA by Example'
 
 cat ~/art.txt
