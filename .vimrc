@@ -1,6 +1,5 @@
 set nocompatible
 
-" Turn on syntax highlighting.
 syntax on
 " (see if this helps typescript work)
 set re=0
@@ -55,9 +54,11 @@ set foldmethod=indent
 set foldnestmax=2
 set foldlevel=100
 
+" Image shortcut
+command! -nargs=1 Img :execute "normal i![<args>](src/<args>.png)"
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
