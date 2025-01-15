@@ -32,6 +32,7 @@ alias orl="ollama run llama3.1"
 alias orq="ollama run qwen2.5-coder:latest"
 
 # alias fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc"
+source /etc/profile.d/nix.sh
 alias fastfetch='nix-shell -p fastfetch --run fastfetch'
 
 mc() {
