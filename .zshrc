@@ -32,6 +32,7 @@ alias orl="ollama run llama3.1"
 alias orq="ollama run qwen2.5-coder:latest"
 
 # alias fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc"
+alias fastfetch='nix-shell -p fastfetch --run fastfetch'
 
 mc() {
     mkdir -p "$1" && cd "$1"
@@ -40,9 +41,36 @@ mc() {
 set clipboard=unnamed
 PROMPT='%F{6}dalongbao@%m%f %1~ %# ' # 6: blue, 1, 9: red, : white, 4: purple, 5: pink, 7: grey, 2: green?
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# Case insensitive cd
+cd() {
+    if (( $+2 )); then
+        builtin cd "$@"
+        return
+    fi
+    if [ -d "$1" ]; then
+        builtin cd "$1"
+        return
+    fi
+    if [ -f "$1" ]; then
+        echo "cd: not a directory: $1"
+        return 1
+    fi
+    if [ ! -d "$1" ]; then
+        # Convert the path to lowercase for comparison
+        local dir_lower="$(echo $1 | tr '[:upper:]' '[:lower:]')"
+        # Find matching directory ignoring case
+        local dir_match="$(find . -maxdepth 1 -type d -iname "$1" -print -quit 2>/dev/null)"
+        if [ -n "$dir_match" ]; then
+            builtin cd "$dir_match"
+            return
+        fi
+    fi
+    builtin cd "$1"
+}
+
+# export PATH="$HOME/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 export rl='Reinforcement Learning'
 export tcpl='The C Programming Language'
